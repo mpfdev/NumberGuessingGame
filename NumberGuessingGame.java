@@ -1,24 +1,25 @@
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
 public class NumberGuessingGame {
 
-    public static void main(String[] args) {
+    private int target;
 
-        int targetNumber = generateNumber();
-        game(targetNumber);
-
+    public int getTarget() {
+        return target;
     }
 
-    public static int generateNumber() {
-        Random random = new Random();
+    public NumberGuessingGame() {
+        this.target = generateNumber();
+    }
 
+    private static int generateNumber() {
+        Random random = new Random();
         return random.nextInt(100) + 1;
     }
 
-    public static void game(int target) {
+    public void game() {
         int[] guesses = new int[99];
         Scanner sc = new Scanner(System.in);
         int numberOfTries = 0;
@@ -31,12 +32,12 @@ public class NumberGuessingGame {
             Arrays.sort(guesses);
             if (Arrays.binarySearch(guesses, guess) < 0) {
 
-                if (guess == target) {
+                if (guess == getTarget()) {
                     System.out.println("You found the number!");
                     flag = false;
                 } else {
 
-                    if (guess < target) {
+                    if (guess < getTarget()) {
                         System.out.println("The number is too low!");
                     } else {
                         System.out.println("The number is too high!");
